@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+typedef struct USERDATA {
+	int age;
+	char name[32];
+	char phone[32];
+	struct USERDATA* pNext;
+}USER;
+
+int main(void) {
+	USER tester[4] = {
+		{20, "tester1", "010-0000-0001", NULL},
+		{21, "tester2", "010-0000-0002", NULL},
+		{22, "tester3", "010-0000-0003", NULL},
+		{23, "tester4", "010-0000-0004", NULL}
+	};
+
+	tester[0].pNext = &tester[1];
+	tester[1].pNext = &tester[2];
+	tester[2].pNext = &tester[3];
+	tester[3].pNext = NULL;
+
+	printf("%s\n", tester[0].name);
+	printf("%s\n", tester[0].pNext->name);
+	printf("%s\n", tester[0].pNext->pNext->name);
+	printf("%s\n", tester[0].pNext->pNext->pNext->name);
+	putchar('\n');
+
+	for (int i = 0; i < 4; i++)
+		printf("%s\n", tester[i].name);
+
+	return 0;
+}
