@@ -20,6 +20,8 @@ int main(void) {
 	tester[2].pNext = &tester[3];
 	tester[3].pNext = NULL;
 
+	//개발 팁
+	//전체 구조를 알 수 있는 출력 코드를 먼저 개발하는 것이 유리하다
 	USER* pUser = &tester[0];
 
 	while (pUser != NULL) {
