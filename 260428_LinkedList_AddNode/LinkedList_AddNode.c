@@ -53,6 +53,22 @@ void ReleaseNode(void) {
     g_h = NULL;
 }
 
+user* SearchbyName(const char* pName) {
+    user* pTmp = g_h;
+    
+    while (pTmp != NULL) {
+        if (strcmp(pTmp->name, pName) == 0) {
+            printf("\"%s\": Found\n", pName);
+            return pTmp;
+        }
+        
+        pTmp = pTmp->pNext;
+    }
+
+    printf("\"%s\": Not found\n", pName);
+    return NULL;
+}
+
 void Tester(void) {
     //테스트 코드
     AddNode(10, "Hoon", "010-0000-0001");
@@ -81,7 +97,11 @@ int main(void) {
 
     Tester();
 
-    PrintList();
+    SearchbyName("jjang");
+    SearchbyName("Hoon");
+    SearchbyName("chul");
+    SearchbyName("Mang");
+
 
     // 메모리 해제
     ReleaseNode();
