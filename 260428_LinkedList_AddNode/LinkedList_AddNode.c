@@ -25,9 +25,12 @@ void AddNode(int age, char* pName, char* pPhone) {
         g_h = newNode;
     }
     else {
-        // 기존 노드가 있다면, 새 노드를 맨 앞에 끼워 넣고 g_h를 갱신함
-        newNode->pNext = g_h;
-        g_h = newNode;
+        user* pT = g_h;
+
+        while (pT->pNext != NULL)
+            pT = pT->pNext;
+
+        pT->pNext = newNode;
     }
 }
 
