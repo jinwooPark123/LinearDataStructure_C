@@ -14,23 +14,28 @@ typedef struct USERDATA {
 user* g_h = NULL;
 
 void AddNode(int age, char* pName, char* pPhone) {
-    user* newNode = malloc(sizeof(user));
-    newNode->age = age;
-    strcpy_s(newNode->name, sizeof(newNode->name), pName);
-    strcpy_s(newNode->phone, sizeof(newNode->phone), pPhone);
-    newNode->pNext = NULL;
+    user* pNewNode = malloc(sizeof(user));
+    pNewNode->age = age;
+    strcpy_s(pNewNode->name, sizeof(pNewNode->name), pName);
+    strcpy_s(pNewNode->phone, sizeof(pNewNode->phone), pPhone);
+    pNewNode->pNext = NULL;
 
     if (g_h == NULL) {
         // 리스트가 비어있을 때 처음 추가되면, 전역변수 g_h가 이 첫 노드를 가리키게 됨
-        g_h = newNode;
+        g_h = pNewNode;
     }
     else {
+        //맨 앞 노드 삽입
+        /*pNewNode->pNext = g_h;
+        g_h = pNewNode;*/
+
+        //맨 뒤 노드 삽입
         user* pT = g_h;
 
-        while (pT->pNext != NULL)
+        while (pT->pNext != NULL) {
             pT = pT->pNext;
-
-        pT->pNext = newNode;
+        }
+        pT->pNext = pNewNode;
     }
 }
 
@@ -53,20 +58,20 @@ void ReleaseNode(void) {
     g_h = NULL;
 }
 
-user* SearchbyName(const char* pName) {
-    user* pTmp = g_h;
-    
-    while (pTmp != NULL) {
-        if (strcmp(pTmp->name, pName) == 0) {
+user* SearchByName(const char* pName) {
+    user* searching = g_h;
+
+    while (searching != NULL) {
+        if (strcmp(searching->name, pName) == 0) {
             printf("\"%s\": Found\n", pName);
-            return pTmp;
+            return searching;
         }
-        
-        pTmp = pTmp->pNext;
+
+        searching = searching->pNext;
     }
 
     printf("\"%s\": Not found\n", pName);
-    return NULL;
+    return 0;
 }
 
 void Tester(void) {
@@ -97,10 +102,10 @@ int main(void) {
 
     Tester();
 
-    SearchbyName("jjang");
-    SearchbyName("Hoon");
-    SearchbyName("chul");
-    SearchbyName("Mang");
+    SearchByName("jjang");
+    SearchByName("Hoon");
+    SearchByName("chul");
+    SearchByName("Mang");
 
 
     // 메모리 해제
