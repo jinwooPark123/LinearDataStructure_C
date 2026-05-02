@@ -74,30 +74,32 @@ user* SearchByName(const char* pName) {
 user* SearchRemoveNode(user** ppPrev, const char* pName) {
 	user* pCur = g_h;
 	user* pPrev = NULL;
-
+	
 	while (pCur != NULL) {
 		if (strcmp(pCur->name, pName) == 0) {
 			*ppPrev = pPrev;
 			return pCur;
-		 }
+		}
 		pPrev = pCur;
 		pCur = pCur->pNext;
 	}
-	return NULL;
+	return;
 }
 
 user* RemoveNode(user* pPrev) {
 	user* pRem = NULL;
-	
+
 	if (pPrev == NULL) {
 		if (g_h == 0)
-			return; // 방어코드, 여기서는 크게 의미가 없어 보임.
+			return; // 일종의 방어코드이며, 여기서는 크게 의미가 없음.
 
-		pRem = g_h;
-		g_h = pRem->pNext;
-		printf("Rem: %s\n", pRem->name);
-		free(pRem);
-		return;
+		else {
+			pRem = g_h;
+			g_h = pRem->pNext;
+			printf("Rem: %s\n", pRem->name);
+			free(pRem);
+			return;
+		}
 	}
 	pRem = pPrev->pNext;
 	pPrev->pNext = pRem->pNext;
