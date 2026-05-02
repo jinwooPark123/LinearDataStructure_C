@@ -7,4 +7,5 @@
   <Project Path="260426_Datastructure/260426_Datastructure.vcxproj" Id="43b65f57-c69d-4741-842c-6aa9a7f9baaa" />
   <Project Path="260426_LinkedList/260426_LinkedList.vcxproj" Id="6e860cd4-5e45-4943-af97-1b41a8cfad71" />
   <Project Path="260428_LinkedList_AddNode/260428_LinkedList_AddNode.vcxproj" Id="86ba4b9d-2f53-4fa3-b6b9-f9b804559592" />
+  <Project Path="retry/retry.vcxproj" Id="f24ee7fe-ac38-4ce0-9676-3cea47a04343" />
 </Solution>
