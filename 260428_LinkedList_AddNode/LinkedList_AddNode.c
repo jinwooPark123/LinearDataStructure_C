@@ -115,9 +115,64 @@ user* SearchToRemove(user** ppPrev, const char* pName) {
 }
 
 
+/**
+ * [함수 설계 의도]
+ * SearchToRemove()에서 찾아낸 '삭제 대상의 앞 노드(pPrev)' 주소를 받아
+ * 실제 리스트의 연결 상태를 변경하고 메모리를 해제하는 함수입니다.
+ */
+void RemoveNode(user* pPrev) {
+    // pRemove: 삭제할 노드를 가리키는 임시 포인터입니다.
+    // 길을 새로 연결하는 동안 삭제 대상을 놓치지 않기 위해(free를 위해) 붙잡아둡니다.
+    user* pRemove = NULL;
+
+    /**
+     * [상황 1] 삭제할 대상이 리스트의 맨 첫 번째 노드(Head)인 경우
+     * - SearchToRemove()가 pPrev에 NULL을 담아 보냈을 때 실행됩니다.
+     */
+    if (pPrev == NULL) {
+        // [방어 코드] 혹시 리스트가 이미 비어버린 상태라면 아무것도 하지 않고 종료합니다.
+        if (g_h == NULL)
+            return;
+
+        // 1. 현재 시작점(g_h)을 삭제 대상으로 지정합니다.
+        pRemove = g_h;
+
+        // 2. [포인터 이전] 시작점(g_h)을 현재 노드가 가리키던 '다음 노드'로 옮깁니다.
+        // 이 과정이 끝나면 g_h는 두 번째 노드를 가리키게 되어 리스트의 새 주인이 바뀝니다.
+        g_h = pRemove->pNext;
+
+        printf("Rem: %s (Head)\n", pRemove->name);
+
+        // 3. 리스트에서 떨어져 나온 예전 헤드 노드를 메모리에서 해제합니다.
+        free(pRemove);
+        return;
+    }
+
+    /**
+     * [상황 2] 삭제할 대상이 중간 또는 마지막 노드인 경우
+     * - pPrev는 삭제할 노드의 바로 '직전 노드' 주소를 가지고 있습니다.
+     */
+
+     // 1. [대상 확보] 이전 노드(pPrev)의 다음 칸(pNext)이 바로 우리가 지울 놈입니다.
+    pRemove = pPrev->pNext;
+
+    /**
+     * 2. [다리 재건] 삭제된 노드 때문에 리스트가 끊기지 않게 우회로를 만듭니다.
+     * - pPrev->pNext = pRemove->pNext;
+     * - 논리: "앞 노드야, 이제 지워질 놈은 건너뛰고 그놈이 잡고 있던 '다음 노드'를 직접 잡아라."
+     * - 이 작업이 완료되어야 리스트의 연속성이 보장됩니다.
+     */
+    pPrev->pNext = pRemove->pNext;
+
+    // 3. [메모리 반환] 우회로가 연결되었으므로, 고립된 pRemove 노드를 메모리에서 삭제합니다.
+    printf("Rem: %s\n", pRemove->name);
+    free(pRemove);
+}
+
+
 void Tester(void) {
     //테스트 코드
-    AddNode(10, "Hoon", "010-0000-0001");
+    AddNode(10, "hoon", "010-0000-0001");
     AddNode(11, "chul", "010-0000-0002");
     AddNode(8, "jjang", "010-0000-0003");
 }
@@ -137,17 +192,57 @@ void PrintList(void) {
             pTmp, pTmp->age, pTmp->name, pTmp->phone, pTmp->pNext);
         pTmp = pTmp->pNext;
     }
+    putchar('\n');
 }
 
-int main(void) {
-
-    Tester();
+void TestStep01(void) {
+    puts("TestStep01()------------------------------------------");
+    AddNode(10, "hoon", "010-0000-0001");
+    AddNode(11, "chul", "010-0000-0002");
+    AddNode(8, "jjang", "010-0000-0003");
+    PrintList();
 
     user* pPrev = NULL;
-    user* Del = SearchToRemove(&pPrev, "Hoon");
-
-    // 메모리 해제
+    if (SearchToRemove(&pPrev, "hoon") != NULL)
+        RemoveNode(pPrev);
     ReleaseNode();
+    putchar('\n');
+}
 
+void TestStep02(void) {
+    puts("TestStep02()------------------------------------------");
+    AddNode(10, "hoon", "010-0000-0001");
+    AddNode(11, "chul", "010-0000-0002");
+    AddNode(8, "jjang", "010-0000-0003");
+    PrintList();
+
+    user* pPrev = NULL;
+    if (SearchToRemove(&pPrev, "chul") != NULL)
+        RemoveNode(pPrev);
+    ReleaseNode();
+    putchar('\n');
+}
+
+void TestStep03(void) {
+    puts("TestStep03()------------------------------------------");
+    AddNode(10, "hoon", "010-0000-0001");
+    AddNode(11, "chul", "010-0000-0002");
+    AddNode(8, "jjang", "010-0000-0003");
+    PrintList();
+
+    user* pPrev = NULL;
+    if (SearchToRemove(&pPrev, "jjang") != NULL)
+        RemoveNode(pPrev);
+    ReleaseNode();
+    putchar('\n');
+}
+
+
+
+int main(void) {
+    TestStep01();
+    TestStep02();
+    TestStep03();
+    
     return 0;
 }
