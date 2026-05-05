@@ -86,7 +86,7 @@ user* SearchRemoveNode(user** ppPrev, const char* pName) {
 	return;
 }
 
-user* RemoveNode(user* pPrev) {
+void RemoveNode(user* pPrev) {
 	user* pRem = NULL;
 
 	if (pPrev == NULL) {
