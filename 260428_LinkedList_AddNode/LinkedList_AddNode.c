@@ -58,7 +58,7 @@ void ReleaseNode(void) {
     g_h = NULL;
 }
 
-user* SearchByName(user** ppPrev, const char* pName) {
+user* SearchByName(const char* pName) {
     user* searching = g_h;
 
     while (searching != NULL) {
