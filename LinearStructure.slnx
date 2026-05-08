@@ -3,6 +3,9 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="../복습/더미헤드 링크드리스트/더미헤드 링크드리스트.vcxproj" Id="b1b9451d-e5c7-4ca8-a974-36c0725c1424" />
+  <Project Path="../복습/더블 링크드리스트/더블 링크드리스트.vcxproj" Id="526c8dd3-94a8-4afa-b5aa-987cf5a8ad87" />
+  <Project Path="../복습/연결링크드리스트/연결링크드리스트.vcxproj" Id="4dc44edb-398a-4b66-bec8-2c8cd49585cb" />
   <Project Path="260426_basicKnowledge/260426_basicKnowledge.vcxproj" Id="f2da4db9-df8f-42c8-8235-4839a3ac2945" />
   <Project Path="260426_Datastructure/260426_Datastructure.vcxproj" Id="43b65f57-c69d-4741-842c-6aa9a7f9baaa" />
   <Project Path="260426_LinkedList/260426_LinkedList.vcxproj" Id="6e860cd4-5e45-4943-af97-1b41a8cfad71" />
