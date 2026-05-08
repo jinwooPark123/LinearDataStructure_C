@@ -71,7 +71,7 @@ void ReleaseNode(void) {
 user* SearchByName(char* pName) {
 	user* pCur = g_h.pNext;
 
-	while (pCur != NULL) {
+	while (pCur != &g_t) {
 		if (strcmp(pCur->name, pName) == 0) {
 			printf("\"%s\": Found\n", pName);
 			return pCur;
