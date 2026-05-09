@@ -13,6 +13,7 @@
   <Project Path="260503_DummyHead_ArchitectureImprove/260503_DummyHead_ArchitectureImprove.vcxproj" Id="b11cd130-1481-4a7c-9042-aa9b875f0c9d" />
   <Project Path="260505_DoubleLinkedList/260505_DoubleLinkedList.vcxproj" Id="254367e2-bbe4-4ba1-9796-ac47e5f02ea9" />
   <Project Path="260508_Stack&amp;Queue/260508_Stack&amp;Queue.vcxproj" Id="51271ae2-acc5-473d-8a05-c57b03d6f67d" />
+  <Project Path="260509_DB/260509_DB.vcxproj" Id="525aea35-4495-4eeb-95dc-263103e4faf8" />
   <Project Path="retry/retry.vcxproj" Id="f24ee7fe-ac38-4ce0-9676-3cea47a04343" />
   <Project Path="retry2/retry2.vcxproj" Id="ec551e79-a852-42dd-85dd-af285f0bc148" />
 </Solution>
